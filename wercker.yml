@@ -35,7 +35,7 @@ deploy:
         server: $KUBERNETES_MASTER
         token: $KUBERNETES_TOKEN
         insecure-skip-tls-verify: true
-        command: apply -f ns.yml
+        command: create -f ns.yml
     - kubectl:
         name: delete OCR secret
         server: $KUBERNETES_MASTER
