@@ -30,4 +30,4 @@ spec:
             cpu: 0.5
         imagePullPolicy: Always
       imagePullSecrets:
-      - name: wrelease
+        - name: wrelease
