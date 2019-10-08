@@ -1,4 +1,4 @@
-FROM kennethheung/pointbase:latest
+FROM kennethheung/pointbase:latest as builder
 
 # setup environment variables
 #   which pickup up from either docker build
@@ -45,5 +45,11 @@ RUN cd /reward \
   && npm install \
   && grunt build:release
 # we should remove the keyfile from the image
-EXPOSE 80
+
+FROM oraclelinux:7-slim
+WORKDIR /reward
+COPY --from=builder /reward /reward
+RUN yum install -y oracle-release-el7 && yum-config-manager --enable ol7_oracle_instantclient && \
+    yum install -y oracle-instantclient19.3-basic && yum install -y oracle-nodejs-release-el7 && rm -rf /var/cache/yum
+RUN curl -sL https://rpm.nodesource.com/setup_10.x | bash - && yum install -y nodejs && rm -rf /var/cache/yumEXPOSE 80
 CMD ["node","server.js"]
