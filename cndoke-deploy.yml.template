@@ -11,7 +11,8 @@ spec:
     spec:
       containers:
       - name: cndoke
-        image: iad.ocir.io/$DOCKER_REPO:$WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT
+        # image: iad.ocir.io/$DOCKER_REPO:$WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT
+        image: $DOCKER_REPO:$WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT
         ports:
         - containerPort: 80
         env:
